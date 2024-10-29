@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaderboard</title>
+    <link rel="stylesheet" href="static/style_reg.css">
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const form = document.getElementById("registerForm");
+            const statusMessage = document.createElement("h5"); 
+            statusMessage.innerText = "Registering..."; 
+            statusMessage.style.display = "none"; 
+            statusMessage.style.color = "blue"; 
+            form.appendChild(statusMessage); 
+
+            form.addEventListener("submit", function (event) {
+                event.preventDefault();
+                var email = document.getElementById('email').value;
+                var username = document.getElementById('username').value;
+                var password = document.getElementById('password').value;
+                var pass_confirm = document.getElementById('password_confirm').value;
+                var facebook = document.getElementById('facebook').value;
+
+                if(password !== pass_confirm) {
+                    alert('Passwords do not match');
+                } else {
+                    const formData = new FormData(form);
+                    formData.append('email', email);
+                    formData.append('username', username);
+                    formData.append('password', password);
+                    formData.append('fb', facebook);
+
+                    statusMessage.style.display = "block";
+
+                    fetch("api/register.php", {
+                        method: "POST",
+                        body: formData
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        statusMessage.style.display = "none";
+
+                        if (data.status === "success") {
+                            alert("Please check email to activate your account!");
+                        } else {
+                            alert(data.message);
+                        }
+                    })
+                    .catch(error => {
+                        statusMessage.style.display = "none";
+                        alert("Error: " + error);
+                    });
+                }
+            });
+        });
+
+        function redirectToPage(url) {
+            window.location.href = url;
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Leaderboard</h1>
+    </header>
+    <section class="under_head">
+        <ul>
+            <li class="log"><strong>Register</strong></li>
+            <li class="board"><button class="but_board" onclick="redirectToPage('index.html')">Leaderboard</button></li>
+        </ul>
+    </section>
+    <section class="user_login">
+        <p>Already have an account? <a href="login.html">Login here!</a></p>
+        <form id="registerForm">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" required placeholder="Input your Username" minlength="3" maxlength="20">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required placeholder="Input your Email">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required placeholder="Input your Password" minlength="8" maxlength="50">
+            <label for="password_confirm">Again</label>
+            <input type="password" id="password_confirm" name="password_confirm" required placeholder="Input your Password again" minlength="8" maxlength="50">
+            <label for="facebook">Facebook</label>
+            <input type="url" id="facebook" name="facebook" placeholder="Optional https://facebook.com/...." required>
+            <button class="logbut" type="submit">Register</button>
+        </form>
+    </section>
+</body>
+</html>
