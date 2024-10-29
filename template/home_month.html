@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaderboard</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <script>
+        function handleSelectChange(event) {
+            var selectedValue = event.target.value;
+            if (selectedValue) {
+                window.location.href = selectedValue;
+            }
+        }
+    
+        function redirectToPage(url) {
+            window.location.href = url;
+        }
+    
+        function fetchData() {
+            fetch('/api/week_leaderboard.php')
+                .then(response => response.json())
+                .then(data => {
+                    const tableBody = document.querySelector('.board tbody');
+                    tableBody.innerHTML = ''; 
+    
+                    if (Array.isArray(data) && data.length > 0) {
+                        data.forEach((row, index) => {
+                            const hour = parseFloat(row.hour);
+                            const formattedHour = !isNaN(hour) ? hour.toFixed(2) : 'N/A';
+                            const days = parseInt(row.days) || 'N/A';
+    
+                            const tr = document.createElement('tr');
+                            tr.innerHTML = `
+                                <td>${row.position || index + 1}</td> 
+                                <td>${row.name || 'N/A'}</td> 
+                                <td>${row.xp || 'N/A'}</td> 
+                                <td>${row.reviews || 'N/A'}</td>
+                                <td>${formattedHour}</td> 
+                                <td>${days}</td> 
+                            `;
+                            tableBody.appendChild(tr);
+                        });
+                    } else {
+                        const tr = document.createElement('tr');
+                        tr.innerHTML = '<td colspan="6">No data found</td>';
+                        tableBody.appendChild(tr);
+                    }
+                })
+                .catch(error => console.error('Error fetching data:', error));
+        }
+    
+        window.onload = function() {
+            fetchData(); 
+        };
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Leaderboard</h1>
+        <p>Who will be winner</p>
+    </header>
+    <section class="user_use">
+        <ul>
+            <li class="ldb">Leaderboard</li>
+            <li class="time">
+                <select  id="pages" name="pages" onchange="handleSelectChange(event)">
+                    <option value="/home/today">Today</option>
+                    <option value="#" selected disabled>Week</option>
+                    <option value="/home/challenge">Challenge</option>
+                </select>
+            </li>
+            <li class="log">
+                <button type="button" class="logbut" onclick="redirectToPage('/login')">Login</button>
+            </li>
+            <li class="reg">
+                <button type="button" class="regbut" onclick="redirectToPage('/register')">Register</button>
+            </li>
+        </ul>
+    </section>
+    <section class="on_board">
+        <button class="filbut">Filter</button>
+        <button class="sbut">Share</button>
+    </section>
+    <section class="board">
+        <table role="grid">
+            <thead>
+                <tr>
+                    <th class="pos">Position</th>
+                    <th class="name">Name</th>
+                    <th class="xp">XP</th>
+                    <th class="rev">Review</th>
+                    <th class="min">Hour</th>
+                    <th class="day">Days</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+</body>
+</html>

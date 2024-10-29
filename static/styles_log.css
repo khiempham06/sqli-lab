@@ -1,0 +1,237 @@
+/* General styles for all devices */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    padding: 2% 5%;
+    background-color: #0b1534;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #ffffff;
+    max-width: 100%;
+    font-size: 1.2rem;
+    margin-left: 40px;
+}
+
+h1 {
+    color: #ffffff;
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 2%;
+}
+
+header {
+    margin-bottom: 2%;
+}
+
+ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2%;
+}
+
+.log{
+    font-size: 2rem;
+}
+label {
+    font-size: 1.2rem;
+    color: #f9d1d1;
+}
+
+.board {
+    margin-left: auto;
+}
+
+.but_board {
+    width: 150px;
+    height: 50px;
+    font-size: 1rem;
+    font-weight: bold;
+    background-color: #0b1534;
+    border: 2px solid #ffa4b6;
+    color: #ffa4b6;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.but_board:hover {
+    background-color: #ffa4b6;
+    color: #0b1534;
+}
+
+.user_login p {
+    font-size: 1rem;
+    padding: 1% 0;
+    color: #ffffff;
+    text-align: left;
+    margin: 0;
+}
+
+.user_login p a {
+    text-decoration: none;
+    color: #ffa4b6;
+}
+
+form {
+    margin: 0 auto;
+    max-width: 400px;
+}
+
+/* Label and input styles */
+label {
+    display: block;
+    margin: 0.5rem 0;
+    font-weight: 600;
+    text-align: left;
+}
+
+input[type="text"], input[type="password"], input[type="email"] {
+    width: calc(100% - 40px);
+    height: 50px;
+    font-size: 1rem;
+    padding: 0 10px;
+    border-radius: 8px;
+    border: 2px solid #ffa4b6;
+    margin-bottom: 1rem;
+    background-color: #ffffff;
+    color: #333;
+}
+
+/* Button styles */
+.logbut {
+    width: 97%;
+    height: 45px;
+    font-size: 1rem;
+    border-radius: 50px;
+    background-color: #ffa4b6;
+    color: #0b1534;
+    cursor: pointer;
+    border: none;
+    margin-bottom: 1rem; /* Add margin to create space */
+    transition: background-color 0.3s;
+}
+
+.logbut:hover {
+    background-color: #f9d1d1;
+}
+
+/* Container for src and addon buttons */
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 1% 0;
+}
+
+/* Style for src and addon buttons */
+.src, .addon {
+    width: 48%;
+    height: 50px;
+    background-color: #0b1534;
+    border: 2px solid #ffa4b6;
+    color: #ffa4b6;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.src:hover, .addon:hover {
+    background-color: #ffa4b6;
+    color: #0b1534;
+}
+
+footer {
+    text-align: right;
+    margin-top: 2%;
+}
+
+footer p {
+    color: #f9d1d1;
+}
+.under_head{
+    padding-right: 2.5rem;
+}
+
+/* Styles for mobile devices */
+@media (max-width: 768px) {
+    body {
+        font-size: 1rem;
+        padding: 2% 4%;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .board {
+        margin-left: 0;
+        margin-top: 10px;
+    }
+
+    .but_board {
+        width: 100%;
+        font-size: 1rem;
+    }
+
+    .user_login p {
+        font-size: 0.9rem;
+    }
+
+    input[type="text"], input[type="password"], input[type="email"] {
+        font-size: 0.9rem;
+    }
+
+    .logbut {
+        height: 40px;
+        font-size: 0.9rem;
+    }
+
+    .button-container {
+        flex-direction: column;
+    }
+
+    .src, .addon {
+        width: 100%;
+        height: 45px;
+        font-size: 0.9rem;
+        margin: 1% 0;
+    }
+
+    footer p {
+        font-size: 0.8rem;
+    }
+}
+
+/* Styles for tablets and desktops */
+@media (min-width: 769px) {
+    body {
+        font-size: 1.2rem;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    input[type="text"], input[type="password"], input[type="email"] {
+        font-size: 1rem;
+    }
+
+    .logbut {
+        font-size: 1rem;
+    }
+
+    .src, .addon {
+        width: 48%;
+        height: 50px;
+        font-size: 1rem;
+    }
+}
