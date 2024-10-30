@@ -1,6 +1,5 @@
 <?php
 require_once 'config.php';
-
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405); 
     echo 'Only POST requests are allowed!';
@@ -79,6 +78,7 @@ if (empty($type)) {
 
 if ($type === 'general') {
     $username = isset($_POST['username']) ? trim($_POST['username']) : '';
+    $username = str_replace(' ', '', $username);
     if (empty($username)) {
         echo json_encode(["status" => "error"]);
         exit();
